@@ -1,0 +1,207 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f8fd;
+  font-family: 'Roboto', sans-serif;
+  color: #333333;
+}
+
+main {
+  width: 65%;
+  background-color: #ffffff;
+  position: relative;
+  margin: 100px 50% 0 50%;
+  transform: translateX(-50%);
+  padding: 30px 30px;
+  box-shadow: 4px -4px 0px #f19aee,
+              8px -8px 0px #ffbd7b,
+              6px 2px 6px #e1e1e1,
+              1px -1px 6px #e1e1e1;
+}
+
+section.notes {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  margin: 2% auto;
+}
+
+h1 {
+  color: #525252;
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 3.5em;
+  padding-left: 1em;
+  margin: 0;
+}
+
+h1::first-letter {
+  font-size: 1.5em;
+}
+
+div.note {
+  width: 250px;
+  height: 250px;
+  background-color: #fdf7d7;
+  box-shadow: 4px 4px 2px -2px #c3c5c2;
+              /* -1px -1px 8px -3px #d2d2d2; */
+  margin: 1.2em 1.2em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: rotate(-1deg);
+}
+
+div.note:nth-of-type(5n+2) {
+  background-color: #f9f1ee;
+  background-image: url('images/dots.png');
+  transform: rotate(3deg);
+}
+
+div.note:nth-of-type(5n+2)::after {
+  content: '';
+  background-image: url('images/tape1.png');
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  width: 95px;
+  height: 34px;
+  transform: rotate(-5deg) translateX(-50%);
+  opacity: 80%;
+}
+
+div.note:nth-of-type(5n+3) {
+  background-color: #fdfef9;
+  transform: rotate(-2deg);
+}
+
+div.note:nth-of-type(5n+3)::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 35px;
+  top: 0;
+  background-color: #c5dcd6;
+}
+
+div.note:nth-of-type(5n+3)::after {
+  content: '';
+  position: absolute;
+  background-color: #ffffff;
+  width: 14px;
+  height: 14px;
+  top: 1em;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 50% 50%;
+  box-shadow: inset 2px 2px 2px #bfbfbf;
+} 
+
+div.note:nth-of-type(5n+4) {
+  background-color: #bed7de;
+  background-image: url('images/lines.png');
+  transform: rotate(5deg);
+}
+
+div.note:nth-of-type(5n+5) {
+  background-color: #ebe7f6;
+  transform: rotate(-2deg);
+}
+
+div.note:nth-of-type(5n+5)::after {
+  content: '';
+  background-image: url('images/clip.png');
+  position: absolute;
+  top: -28px;
+  left: 1em;
+  width: 50px;
+  height: 50px;
+  transform: skewX(3deg);
+}
+
+p.note_title {
+  width: 100%;
+  text-align: center;
+}
+
+p.note_title::before {
+  content: '"';
+}
+
+p.note_title::after {
+  content: '"';
+}
+
+button {
+  border: none;
+  height: 35px;
+  width: 35px;
+  border-radius: 5px;
+  background-color: transparent;
+  margin: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  opacity: 100%;
+  background-color: #ed81ab;
+  transition: 0.4s;
+}
+
+button.edit {
+  background-image: url('images/pen2.png')
+}
+
+button.delete {
+  background-image: url('images/bin2.png')
+}
+
+button.add {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+button.add::before {
+  content: '';
+  position: absolute;
+  background-color: #595959;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 30px;
+  height: 5px;
+  border-radius: 1px;
+}
+
+button.add::after {
+  content: '';
+  position: absolute;
+  background-color: #595959;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) rotate(90deg);;
+  width: 30px;
+  height: 5px;
+  border-radius: 1px;
+}
+
+footer {
+  width: 100%;
+  justify-content: center;
+  margin: 3% 0;
+}
+
+footer p {
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
