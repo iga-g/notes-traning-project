@@ -29,7 +29,7 @@ window.onload = function() {
         var noteBackgroundIndex = (noteIndex % 5) + 1
         document.querySelector('textarea').classList.add(`noteStyle${noteBackgroundIndex}`)
         document.querySelector('main').classList.add(`noteStyle${noteBackgroundIndex}`)
-    } else if (window.location.href.indexOf('index.html') >= 0) {
+    } else if (window.location.pathname == '/notes-trening-project/') {
         if ('content' in document.createElement('template')) {
             var notesPlace = document.querySelector('main .notes')
             var template = document.querySelector('#noteTemplate')
