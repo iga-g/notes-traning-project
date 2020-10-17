@@ -3,29 +3,37 @@
 <html lang="pl">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Strona z Twoimi notatkami">
-  <title>Notatki</title>
-  <link rel="stylesheet" href="note-style.css">
-  <link rel="icon" href="images/favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Roboto&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Strona z Twoimi notatkami">
+    <title>Notatki</title>
+    <link rel="stylesheet" href="variables.css">
+    <link rel="stylesheet" href="note-style.css">
+    <link rel="icon" href="images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Roboto&display=swap" rel="stylesheet">
+    <script src="backend.js"></script>
 </head>
- 
+
 <body>
 
-  <main style="--background-color: #fdf7d7;">
-    <h1>Pojedyncza notatka</h1>
-    <nav>
-      <button class="save"></button>
-      <button class="delete"></button><br>
-    </nav>
-    <textarea placeholder="Wprowadź tekst" rows="50" cols="100"></textarea>
-  </main>
+    <main>
+        <h1>Pojedyncza notatka</h1>
+        <nav>
+            <button class="save"></button>
+            <button class="delete"></button>
+            <select id="noteBackground">
+                <option value="noteBackground1">Tło 1</option>
+                <option value="noteBackground2">Tło 2</option>
+                <option value="noteBackground3">Tło 3</option>
+            </select>
+            <br />
+        </nav>
+        <textarea placeholder="Wprowadź tekst" rows="50" cols="100"></textarea>
+    </main>
 
-  <footer>
-    <p>Copyright - IGA 2020 - training project</p>
-  </footer>
+    <footer>
+        <p>Copyright - IGA 2020 - training project</p>
+    </footer>
 
 </body>
 
