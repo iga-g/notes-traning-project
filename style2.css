@@ -27,7 +27,7 @@ section.notes {
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
-  margin: 2% auto;
+  margin: 1% auto;
 }
 
 h1 {
@@ -196,7 +196,6 @@ button.add::after {
 
 footer {
   width: 100%;
-  justify-content: center;
   margin: 3% 0;
 }
 
