@@ -16,16 +16,19 @@ window.onload = function() {
         })
         document.querySelector('button.save').dataset.noteIndex = noteIndex
         document.querySelector('button.save').addEventListener('click', function() {
-            saveNote(this.dataset.noteIndex, document.querySelector('textarea').value)
-            if (typeof window.noteBackgrounds['note_' + this.dataset.noteIndex] === 'undefined') window.noteBackgrounds['note_' + this.dataset.noteIndex] = ''
-            window.noteBackgrounds['note_' + this.dataset.noteIndex] = document.querySelector('#noteBackground').value
-            window.localStorage.setItem('noteBackgrounds', JSON.stringify(window.noteBackgrounds))
-            window.location.reload()
-        })
-        if (typeof window.noteBackgrounds['note_' + noteIndex] !== 'undefined') {
-            document.querySelector(`#noteBackground option[value=${window.noteBackgrounds['note_' + noteIndex]}]`).selected = "selected"
-            document.queryElement('textarea').classList.add(`noteStyle${noteIndex % 4}`)
-        }
+                saveNote(this.dataset.noteIndex, document.querySelector('textarea').value)
+                if (typeof window.noteBackgrounds['note_' + this.dataset.noteIndex] === 'undefined') window.noteBackgrounds['note_' + this.dataset.noteIndex] = ''
+                window.noteBackgrounds['note_' + this.dataset.noteIndex] = document.querySelector('#noteBackground').value
+                window.localStorage.setItem('noteBackgrounds', JSON.stringify(window.noteBackgrounds))
+                window.location.reload()
+            })
+            // if (typeof window.noteBackgrounds['note_' + noteIndex] !== 'undefined') {
+            //     document.querySelector(`#noteBackground option[value=${window.noteBackgrounds['note_' + noteIndex]}]`).selected = "selected"
+            //     document.queryElement('textarea').classList.add(`noteStyle${noteIndex % 4}`)
+            // }
+        var noteBackgroundIndex = (noteIndex % 5) + 1
+        document.querySelector('textarea').classList.add(`noteStyle${noteBackgroundIndex}`)
+        document.querySelector('main').classList.add(`noteStyle${noteBackgroundIndex}`)
     } else if (window.location.href.indexOf('index.html') >= 0) {
         if ('content' in document.createElement('template')) {
             var notesPlace = document.querySelector('main .notes')
@@ -44,8 +47,8 @@ window.onload = function() {
                     window.location.reload()
                 })
                 clone.querySelector('.note > a').href = 'note.html?id=' + index
-                if (typeof window.noteBackgrounds['note_' + index] !== 'undefined')
-                    clone.querySelector('.note').classList.add(window.noteBackgrounds['note_' + index])
+                    // if (typeof window.noteBackgrounds['note_' + index] !== 'undefined')
+                    //     clone.querySelector('.note').classList.add(window.noteBackgrounds['note_' + index])
                 notesPlace.appendChild(clone)
             }
         }
