@@ -1,60 +1,47 @@
-window.noteBackgrounds = {}
+function loadIndex() {
+    if ('content' in document.createElement('template')) {
+        var notesPlace = document.querySelector('main .notes')
+        var template = document.querySelector('#noteTemplate')
+        var allNotes = getAllNotes()
 
-window.onload = function() {
-    window.noteBackgrounds = window.localStorage.getItem('noteBackgrounds') || '{}'
-    window.noteBackgrounds = JSON.parse(window.noteBackgrounds)
-
-    if (window.location.href.indexOf('note.html') >= 0) {
-        var noteIndex = parseInt(window.location.search.substr(4))
-        document.querySelector('button.delete').dataset.noteIndex = noteIndex
-        document.querySelector('textarea').value = getNote(noteIndex)
-        document.querySelector('button.delete').addEventListener('click', function() {
-            deleteNote(this.dataset.noteIndex)
-            window.location.href = 'index.html'
-            delete window.noteBackgrounds['note_' + this.dataset.noteIndex]
-            window.localStorage.setItem('noteBackgrounds', JSON.stringify(window.noteBackgrounds))
-        })
-        document.querySelector('button.save').dataset.noteIndex = noteIndex
-        document.querySelector('button.save').addEventListener('click', function() {
-                saveNote(this.dataset.noteIndex, document.querySelector('textarea').value)
-                if (typeof window.noteBackgrounds['note_' + this.dataset.noteIndex] === 'undefined') window.noteBackgrounds['note_' + this.dataset.noteIndex] = ''
-                window.noteBackgrounds['note_' + this.dataset.noteIndex] = document.querySelector('#noteBackground').value
-                window.localStorage.setItem('noteBackgrounds', JSON.stringify(window.noteBackgrounds))
+        for (let index = 0; index < allNotes.length; index++) {
+            const element = allNotes[index]
+            var clone = template.content.cloneNode(true)
+            var trimText = element
+            if (trimText.length > 60) trimText = trimText.substr(0, 60) + '...'
+            clone.querySelector('.note_title').innerText = element.title
+            clone.querySelector('button.delete').dataset.noteIndex = index
+            clone.querySelector('button.delete').addEventListener('click', function() {
+                deleteNote(this.dataset.noteIndex)
                 window.location.reload()
             })
-            // if (typeof window.noteBackgrounds['note_' + noteIndex] !== 'undefined') {
-            //     document.querySelector(`#noteBackground option[value=${window.noteBackgrounds['note_' + noteIndex]}]`).selected = "selected"
-            //     document.queryElement('textarea').classList.add(`noteStyle${noteIndex % 4}`)
-            // }
-        var noteBackgroundIndex = (noteIndex % 5) + 1
-        document.querySelector('textarea').classList.add(`noteStyle${noteBackgroundIndex}`)
-        document.querySelector('main').classList.add(`noteStyle${noteBackgroundIndex}`)
-    } else if (window.location.pathname == '/notes-trening-project/') {
-        if ('content' in document.createElement('template')) {
-            var notesPlace = document.querySelector('main .notes')
-            var template = document.querySelector('#noteTemplate')
-            var allNotes = getAllNotes()
-
-            for (let index = 0; index < allNotes.length; index++) {
-                const element = allNotes[index]
-                var clone = template.content.cloneNode(true)
-                var trimText = element
-                if (trimText.length > 60) trimText = trimText.substr(0, 60) + '...'
-                clone.querySelector('.note_title').innerText = element
-                clone.querySelector('button.delete').dataset.noteIndex = index
-                clone.querySelector('button.delete').addEventListener('click', function() {
-                    deleteNote(this.dataset.noteIndex)
-                    window.location.reload()
-                })
-                clone.querySelector('.note > a').href = 'note.html?id=' + index
-                    // if (typeof window.noteBackgrounds['note_' + index] !== 'undefined')
-                    //     clone.querySelector('.note').classList.add(window.noteBackgrounds['note_' + index])
-                notesPlace.appendChild(clone)
-            }
+            clone.querySelector('.note > a').href = 'note.html?id=' + index
+            notesPlace.appendChild(clone)
         }
-
-        document.querySelector('button.add').addEventListener('click', function() { createNote() })
     }
+
+    document.querySelector('button.add').addEventListener('click', function() { createNote() })
+}
+
+function loadNote() {
+    var noteIndex = parseInt(window.location.search.substr(4))
+    document.querySelector('button.delete').dataset.noteIndex = noteIndex
+    console.log(getNote(noteIndex))
+    document.querySelector('textarea').value = getNote(noteIndex).content
+    document.querySelector('.nav_flex>h1').innerText = getNote(noteIndex).title
+    document.title = getNote(noteIndex).title
+    document.querySelector('button.delete').addEventListener('click', function() {
+        deleteNote(this.dataset.noteIndex)
+        window.location.href = 'index.html'
+    })
+    document.querySelector('button.save').dataset.noteIndex = noteIndex
+    document.querySelector('button.save').addEventListener('click', function() {
+        saveNote(this.dataset.noteIndex, document.querySelector('textarea').value, document.querySelector('.nav_flex>h1').innerText)
+        window.location.reload()
+    })
+    var noteBackgroundIndex = (noteIndex % 5) + 1
+    document.querySelector('textarea').classList.add(`noteStyle${noteBackgroundIndex}`)
+    document.querySelector('main').classList.add(`noteStyle${noteBackgroundIndex}`)
 }
 
 function deleteNote(noteID) {
@@ -67,7 +54,18 @@ function deleteNote(noteID) {
 function createNote() {
     var allNotes = window.localStorage.getItem('allNotes') || '[]'
     allNotes = JSON.parse(allNotes)
-    allNotes.push('')
+    var maxId = 0
+    for (let index = 0; index < allNotes.length; index++) {
+        const element = allNotes[index];
+        if (element.id >= maxId) {
+            maxId = element.id + 1
+        }
+    }
+    allNotes.push({
+        id: maxId,
+        title: 'Nazwa twojej notatki',
+        content: ''
+    })
     window.localStorage.setItem('allNotes', JSON.stringify(allNotes))
     window.location.reload()
 }
@@ -75,13 +73,27 @@ function createNote() {
 function getNote(noteID) {
     var allNotes = window.localStorage.getItem('allNotes') || '[]'
     allNotes = JSON.parse(allNotes)
-    return allNotes[noteID]
+    var retElem = {}
+    for (let index = 0; index < allNotes.length; index++) {
+        const element = allNotes[index];
+        if (element.id == noteID) {
+            retElem = allNotes[index];
+        }
+    }
+    return retElem
 }
 
-function saveNote(noteID, content) {
+function saveNote(noteID, content, title) {
     var allNotes = window.localStorage.getItem('allNotes') || '[]'
     allNotes = JSON.parse(allNotes)
-    allNotes[noteID] = content
+    for (let index = 0; index < allNotes.length; index++) {
+        const element = allNotes[index];
+        if (element.id == noteID) {
+            allNotes[index].content = content
+            allNotes[index].title = title
+            break
+        }
+    }
     window.localStorage.setItem('allNotes', JSON.stringify(allNotes))
 }
 

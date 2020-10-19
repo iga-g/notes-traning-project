@@ -6,29 +6,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Strona z Twoimi notatkami">
-    <title>Notatki</title>
+    <title>Nazwa twojej notatki</title>
     <link rel="stylesheet" href="variables.css">
     <link rel="stylesheet" href="note-style.css">
     <link rel="icon" href="images/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Roboto&display=swap" rel="stylesheet">
     <script src="backend.js"></script>
+    <script>
+        window.onload = function() {
+            loadNote()
+        }
+    </script>
 </head>
 
 <body>
 
     <main>
-        <h1>Pojedyncza notatka</h1>
-        <nav>
-            <button class="save"></button>
-            <button class="delete"></button>
-            <select id="noteBackground">
-                <option value="noteBackground1">Tło 1</option>
-                <option value="noteBackground2">Tło 2</option>
-                <option value="noteBackground3">Tło 3</option>
-            </select>
-            <br />
-        </nav>
-        <textarea placeholder="Wprowadź tekst" rows="50" cols="100"></textarea>
+        <section class="nav_flex">
+            <h1 contenteditable="true">Nazwa twojej notatki</h1>
+            <nav>
+                <a href="index.html"><button class="back"></button></a>
+                <button class="save"></button>
+                <button class="delete"></button>
+                <br />
+            </nav>
+        </section>
+
+        <textarea placeholder="Wprowadź treść notatki" rows="50" cols="100"></textarea>
     </main>
 
     <footer>
@@ -36,6 +40,5 @@
     </footer>
 
 </body>
-
 
 </html>
