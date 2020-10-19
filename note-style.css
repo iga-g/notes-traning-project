@@ -10,7 +10,7 @@ body {
 
 main {
     width: 65%;
-    background: var(--background, #fdf7d7);
+    background: #fdf7d7;
     position: relative;
     margin: 100px 50% 0 50%;
     transform: translateX(-50%);
@@ -23,16 +23,23 @@ h1 {
     font-family: 'Reenie Beanie', cursive;
     font-size: 3.5em;
     padding-left: 1em;
+    padding-top: 0.3em;
     margin: 0;
 }
 
-h1::first-letter {
-    font-size: 1.5em;
+[contenteditable="true"] {
+    outline: none;
 }
 
 nav {
     margin: 20px 50px;
+    justify-self: flex-end;
+}
+
+.nav_flex {
     display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 button {
@@ -52,6 +59,10 @@ button:hover {
     transition: 0.4s;
 }
 
+button.back {
+    background-image: url('images/back.png');
+}
+
 button.save {
     background-image: url('images/save2.png')
 }
@@ -67,8 +78,9 @@ textarea {
     border: none;
     outline: none;
     resize: none;
-    font-size: 0.8em;
+    font-size: 1em;
     font-family: 'Roboto', sans-serif;
+    line-height: 1.6em;
 }
 
 footer {
@@ -92,21 +104,26 @@ footer p {
 }
 
 .noteStyle1 {
-    background: black;
+    background: var(--noteBackground1);
 }
 
 .noteStyle2 {
-    background: white;
+    background: var(--noteBackground2);
 }
 
 .noteStyle3 {
-    background: yellow;
+    background: var(--noteBackground3);
 }
 
 .noteStyle4 {
-    background: red;
+    background: var( --noteBackground4);
 }
 
 .noteStyle5 {
-    background: orange;
+    background: var(--noteBackground5);
+}
+
+.noteStyle4 textarea,
+.noteStyle2 textarea {
+    background: transparent;
 }

@@ -1,5 +1,7 @@
 :root {
-    --notebg1: url('images/dots.png');
-    --notebg2: url('images/lines.png');
-    --notebg3: url('images/clip.png');
+    --noteBackground1: #fdf7d7;
+    --noteBackground2: url('images/dots.png'), #f9f1ee;
+    --noteBackground3: #fdfef9;
+    --noteBackground4: url('images/lines.png'), #bed7de;
+    --noteBackground5: #ebe7f6;
 }
